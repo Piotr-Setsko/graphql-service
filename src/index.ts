@@ -1,8 +1,12 @@
 import { ApolloServer } from 'apollo-server';
 import typeDefs from './schema';
 import { resolvers } from './resolvers';
-import { UserAPI } from './user';
-import { PersonalizationAPI } from './persona';
+import { UserAPI } from './datasources/user';
+import { PersonalizationAPI } from './datasources/persona';
+import { AlbumAPI } from './datasources/albums';
+import { GenreAPI } from './datasources/genre';
+import { ArtistAPI } from './datasources/artists';
+import { BandAPI } from './datasources/bands';
 
 const server = new ApolloServer({
   typeDefs,
@@ -13,6 +17,10 @@ const server = new ApolloServer({
   dataSources: () => {
     return {
       userAPI: new UserAPI(),
+      albumAPI: new AlbumAPI(),
+      genreAPI: new GenreAPI(),
+      artistAPI: new ArtistAPI(),
+      bandAPI: new BandAPI(),
       personalizationAPI: new PersonalizationAPI(),
     };
   },

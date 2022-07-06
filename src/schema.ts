@@ -2,7 +2,25 @@ import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   type Query {
-    user(id: ID!): User
+    user(id: ID!): User,
+
+    band(id: ID!): Band,
+
+    bandsAll: [Band]!,
+
+    albumsAll: [Album]!,
+
+    genresAll: [Genre]!,
+
+    artistsAll: [Artist]! 
+  }
+
+  type Artist {
+    bands: [Band]!,
+  }
+
+  type Band {
+    members: [Member]
   }
 
   type Mutation {
@@ -12,6 +30,7 @@ const typeDefs = gql`
       password: String!,
       email: String!
     ): User,
+
     login(email: String!, password: String!): jwt
   }
 
@@ -19,32 +38,35 @@ const typeDefs = gql`
     jwt: String!
   }
 
-  # type Artist {
-  #   id: ID!
-  #   firstName: String
-  #   secondName: String
-  #   middleName: String
-  #   birthDate: String
-  #   birthPlace: String
-  #   country: String
-  #   bands: [ID]
-  #   instruments: String
-  # }
-  # type Band {
-  #   id: ID!
-  #   name: String
-  #   origin: String
-  #   membersId: Member[];
-  #   website: String
-  #   genres: String
-  # }
-  # type Genre {
-  #   id: ID!
-  #   name: String
-  #   description: String
-  #   country: String
-  #   year: Int
-  # }
+  type Artist {
+    id: ID!
+    firstName: String
+    secondName: String
+    middleName: String
+    birthDate: String
+    birthPlace: String
+    country: String
+    bands: [Band]
+    instruments: [String]
+  }
+
+  type Band {
+    id: ID!
+    name: String
+    origin: String
+    members: [Member]
+    website: String
+    genres: [Genre]
+  }
+
+  type Genre {
+    id: ID!
+    name: String
+    description: String
+    country: String
+    year: Int
+  }
+  
   # type Favourites {
   #   id: ID!
   #   userId: ID!
@@ -53,16 +75,17 @@ const typeDefs = gql`
   #   artists: [ID]
   #   tracks: [ID]
   # }
-  # type Album {
-  #   id: ID
-  #   name: String
-  #   released: Int
-  #   artists: [Artist]
-  #   bands: [Band]
-  #   tracks: [Track]
-  #   genres: [Genre]
-  #   image: String
-  # }
+
+  type Album {
+    id: ID
+    name: String
+    released: Int
+    artists: [Artist]
+    bands: [Band]
+    tracks: [Track]
+    genres: [Genre]
+    image: String
+  }
   
   type User {
     id: ID!
@@ -80,20 +103,23 @@ const typeDefs = gql`
     email: String!
   }
 
-  # type Track {
-  #   id: ID!
-  #   title: String
-  #   albums: String
-  #   bands: [Band]
-  #   duration: Int
-  #   released: Int
-  #   genres: [Genre]
-  # }
-  # type Member {
-  #   artist: string,
-  #   instrument: string,
-  #   years: string[],
-  # }
+  type Track {
+    id: ID!
+    title: String
+    albums: String
+    bands: [Band]
+    duration: Int
+    released: Int
+    genres: [Genre]
+  }
+
+  type Member {
+    id: ID!
+    firstName: String,
+    secondName: String,
+    instrument: String
+    years: [String]
+  }
 `;
 
 export default typeDefs;
