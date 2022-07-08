@@ -1,5 +1,4 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
-const albums = [{id:"123", name: "Nirvana"}, {id:"1234", name: "Prodigy"}];
 
 export class AlbumAPI extends RESTDataSource {
   constructor() {

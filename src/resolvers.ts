@@ -1,6 +1,9 @@
+import { Context } from '@apollo/client';
+import { Artist, Genre } from './interface';
+import { Track } from './tracks/track.interface';
 import { renameKey } from './utils/utils';
 
-export const resolvers = {
+export const resolversAll = {
   Query: {
     user: async (_: string, { id }: { id: string }, { dataSources }: {
       dataSources: any;
@@ -26,12 +29,20 @@ export const resolvers = {
       return renameKey(bands.items);
     },
 
-    albumsAll: async(_: string, __: string, { dataSources }: {
+    albumsAll: async (_: string, __: string, { dataSources }: {
       dataSources: any;
     }): Promise<any> => {
       const albums = await dataSources.albumAPI.getAlbumsAll();
 
       return renameKey(albums.items);
+    },
+
+    genre: async (_: string, { id }: { id: string }, { dataSources }: {
+      dataSources: Context;
+    }): Promise<any> => {
+      const genre = await dataSources.genreAPI.getGenre(id);
+
+      return renameKey(genre);
     },
 
     genresAll: async (_: string, __: string, { dataSources }: {
@@ -46,12 +57,12 @@ export const resolvers = {
       const artists = await dataSources.artistAPI.getArtistsAll();
 
       return renameKey(artists.items)
-    }
+    },
   },
 
   Band: {
-    members: async ({members}: {members: any}, _:string, { dataSources }: { dataSources: any }): Promise<any> => {
-      const artists = await Promise.all(members.map(async ({id}:{id: string}) => await dataSources.artistAPI.getMember(id)));
+    members: async ({ members }: { members: any }, _: string, { dataSources }: { dataSources: any }): Promise<any> => {
+      const artists = await Promise.all(members.map(async ({ id }: { id: string }) => await dataSources.artistAPI.getMember(id)));
       const membersData = artists.map((item, i) => {
         return ({
           id: item._id,
@@ -69,7 +80,7 @@ export const resolvers = {
   Artist: {
     bands: async ({ bandsIds }: { bandsIds: [string] }, _: string, { dataSources }: { dataSources: any }): Promise<any> => {
       const bands = await Promise.all(bandsIds.map(async (id) => await dataSources.bandAPI.getBand(id)));
-      
+
       return renameKey(bands);
     }
   },
@@ -99,6 +110,26 @@ export const resolvers = {
       return {
         jwt: jwt.jwt
       }
-    }
+    },
+
+    createGenre: async (_: string, args: { input: { name: string, description: string, country: string, year: number } }, { dataSources }: {
+      dataSources: any;
+    }): Promise<any> => {
+      const newGenre = await dataSources.genreAPI.createGenre({ ...args.input });
+
+      return renameKey(newGenre);
+    },
+
+    changeGenre: async (_: string, args: { id: string, input: { name: string, description: string, country: string, year: number } }, { dataSources }: { dataSources: Context }): Promise<any> => {
+      const genre = await dataSources.genreAPI.changeGenre(args.id, { ...args.input });
+
+      return renameKey(genre)
+    },
+
+    deleteGenre: async (_: string, { id }: { id: string }, { dataSources }: { dataSources: Context }): Promise<any> => {
+      const result = await dataSources.genreAPI.deleteGenre(id);
+
+      return result;
+    },
   }
 }

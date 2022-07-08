@@ -41,16 +41,6 @@ interface Genre {
   year: string;
 }
 
-interface Track {
-  _id: string;
-  title: string;
-  albumId: string;
-  bandsIds: string[];
-  duration: number;
-  released: number;
-  genresIds: string[];
-}
-
 interface Album {
   _id: string;
   name: string;
@@ -71,4 +61,14 @@ interface Favorite {
   tracksIds: string[];
 }
 
-export { User };
+interface Pagination {
+  limit: number,
+  offset: number
+}
+
+interface Del {
+  acknowledged: boolean,
+  deletedCount: number
+}
+
+export { User, Artist, Genre, Pagination, Del };

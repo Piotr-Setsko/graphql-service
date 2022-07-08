@@ -1,22 +1,25 @@
 import { gql } from 'apollo-server';
 
-const typeDefs = gql`
+const allTypeDefs = gql`
   type Query {
-    user(id: ID!): User,
+    user(id: ID!): User
 
-    band(id: ID!): Band,
+    band(id: ID!): Band
 
-    bandsAll: [Band]!,
+    bandsAll: [Band]!
 
-    albumsAll: [Album]!,
+    albumsAll: [Album]!
 
-    genresAll: [Genre]!,
+    genre(id: ID!): Genre
 
-    artistsAll: [Artist]! 
+    genresAll: [Genre]!
+
+    artistsAll: [Artist]!
+
   }
 
   type Artist {
-    bands: [Band]!,
+    bands: [Band]!
   }
 
   type Band {
@@ -25,13 +28,26 @@ const typeDefs = gql`
 
   type Mutation {
     register(
-      firstName: String!,
-      secondName: String!,
-      password: String!,
+      firstName: String!
+      secondName: String!
+      password: String!
       email: String!
-    ): User,
+    ): User
+
+    createGenre(input: GenreInput): Genre!
+
+    changeGenre(id: ID!, input: GenreInput): Genre!
+
+    deleteGenre(id: ID!): DEL
 
     login(email: String!, password: String!): jwt
+  }
+
+  input GenreInput {
+    name: String
+    description: String
+    country: String
+    year: Int
   }
 
   type jwt {
@@ -66,7 +82,7 @@ const typeDefs = gql`
     country: String
     year: Int
   }
-  
+
   # type Favourites {
   #   id: ID!
   #   userId: ID!
@@ -86,7 +102,7 @@ const typeDefs = gql`
     genres: [Genre]
     image: String
   }
-  
+
   type User {
     id: ID!
     firstName: String
@@ -103,23 +119,18 @@ const typeDefs = gql`
     email: String!
   }
 
-  type Track {
-    id: ID!
-    title: String
-    albums: String
-    bands: [Band]
-    duration: Int
-    released: Int
-    genres: [Genre]
-  }
-
   type Member {
     id: ID!
-    firstName: String,
-    secondName: String,
+    firstName: String
+    secondName: String
     instrument: String
     years: [String]
   }
+
+  type DEL {
+    acknowledged: Boolean
+    deletedCount: Int
+  }
 `;
 
-export default typeDefs;
+export default allTypeDefs;

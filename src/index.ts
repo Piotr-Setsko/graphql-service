@@ -1,12 +1,18 @@
+import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge';
 import { ApolloServer } from 'apollo-server';
-import typeDefs from './schema';
-import { resolvers } from './resolvers';
+import allTypeDefs from './schema';
+import { resolversAll } from './resolvers';
 import { UserAPI } from './datasources/user';
-import { PersonalizationAPI } from './datasources/persona';
 import { AlbumAPI } from './datasources/albums';
 import { GenreAPI } from './datasources/genre';
 import { ArtistAPI } from './datasources/artists';
 import { BandAPI } from './datasources/bands';
+import { TrackAPI } from './tracks/tracksAPI';
+import { trackResolvers } from './tracks/track.resolrers';
+import { trackTypeDefs } from './tracks/track.shema';
+
+const resolvers = mergeResolvers([resolversAll, trackResolvers]) as any;
+const typeDefs = mergeTypeDefs([allTypeDefs, trackTypeDefs]) as any;
 
 const server = new ApolloServer({
   typeDefs,
@@ -21,17 +27,14 @@ const server = new ApolloServer({
       genreAPI: new GenreAPI(),
       artistAPI: new ArtistAPI(),
       bandAPI: new BandAPI(),
-      personalizationAPI: new PersonalizationAPI(),
+      trackAPI: new TrackAPI()
     };
   },
 
-  // context: ({ req }) => {
-
-  //   const token = req.headers.authorization || '';
-  //   console.log(token);
-    
-  //   return token;
-  // },
+  context: ({ req }) => {
+    const token = req.headers.authorization || '';
+    return {token};
+  },
 });
 
 server.listen().then(({ url }) => {
