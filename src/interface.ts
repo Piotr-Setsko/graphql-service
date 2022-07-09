@@ -12,13 +12,7 @@ interface User {
 
 
 
-interface Genre {
-  _id: string;
-  name: string;
-  description: string;
-  country: string;
-  year: string;
-}
+
 
 interface Pagination {
   limit: number;
@@ -30,4 +24,4 @@ interface Del {
   deletedCount: number;
 }
 
-export { User, Genre, Pagination, Del }; 
+export { User, Pagination, Del }; 

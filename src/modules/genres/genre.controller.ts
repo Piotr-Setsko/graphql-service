@@ -1,4 +1,5 @@
 import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest';
+import { Genre } from './genre.interface';
 
 export class GenreAPI extends RESTDataSource {
   constructor() {
@@ -11,10 +12,10 @@ export class GenreAPI extends RESTDataSource {
     request.headers.set('Authorization', this.context.token);
   }
 
-  async getGenresAll(limit = 3) {
+  async getGenresAll(limit = 3, offset = 0) {
     return this.get('', {
       "limit": limit,
-      "offset": 0
+      "offset": offset
     });
   }
 
@@ -22,11 +23,11 @@ export class GenreAPI extends RESTDataSource {
     return this.get(`/${encodeURIComponent(id)}`);
   }
 
-  async createGenre(genreData: any) {
+  async createGenre(genreData: Genre) {
     return this.post('', genreData)
   }
 
-  async changeGenre(id: string, data: any) {
+  async changeGenre(id: string, data: Genre) {
     return this.put(`/${encodeURIComponent(id)}`, data);
   }
 

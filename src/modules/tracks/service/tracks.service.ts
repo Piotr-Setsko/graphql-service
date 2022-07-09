@@ -1,9 +1,10 @@
 import { Context } from '@apollo/client';
 import { renameKey } from '../../../utils/utils';
-import { Del, Genre, Pagination } from '../../../interface';
+import { Del, Pagination } from '../../../interface';
 import { Track } from '../track.interface';
 import { Artist } from '../../artists/artist.interface';
 import { Band } from '../../bands/band.interface';
+import { Genre } from '../../genres/genre.interface';
 
 export const trackResolvers = {
   Query: {

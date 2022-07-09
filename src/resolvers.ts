@@ -1,4 +1,3 @@
-import { Context } from '@apollo/client';
 import { renameKey } from './utils/utils';
 import { mergeResolvers } from '@graphql-tools/merge';
 import { trackResolvers } from './modules/tracks/service/tracks.service';
@@ -6,6 +5,7 @@ import { favoriteResolvers } from './modules/favorites/services/favorites.servic
 import { aristResolvers } from './modules/artists/services/artists.service';
 import { albumResolvers } from './modules/albums/services/albums.service';
 import { bandResolvers } from './modules/bands/services/band.services';
+import { genreResolvers } from './modules/genres/services/genres.service';
 
 const resolversAll = {
   Query: {
@@ -15,26 +15,6 @@ const resolversAll = {
       const user = await dataSources.userAPI.getUser(id);
 
       return renameKey(user);
-    },
-
-    
-
-    
-
-    genre: async (_: string, { id }: { id: string }, { dataSources }: {
-      dataSources: Context;
-    }): Promise<any> => {
-      const genre = await dataSources.genreAPI.getGenre(id);
-
-      return renameKey(genre);
-    },
-
-    genresAll: async (_: string, __: string, { dataSources }: {
-      dataSources: any;
-    }): Promise<any> => {
-      const genres = await dataSources.genreAPI.getGenresAll();
-
-      return renameKey(genres.items);
     },
   },
 
@@ -69,26 +49,8 @@ const resolversAll = {
       }
     },
 
-    createGenre: async (_: string, args: { input: { name: string, description: string, country: string, year: number } }, { dataSources }: {
-      dataSources: any;
-    }): Promise<any> => {
-      const newGenre = await dataSources.genreAPI.createGenre({ ...args.input });
-
-      return renameKey(newGenre);
-    },
-
-    changeGenre: async (_: string, args: { id: string, input: { name: string, description: string, country: string, year: number } }, { dataSources }: { dataSources: Context }): Promise<any> => {
-      const genre = await dataSources.genreAPI.changeGenre(args.id, { ...args.input });
-
-      return renameKey(genre)
-    },
-
-    deleteGenre: async (_: string, { id }: { id: string }, { dataSources }: { dataSources: Context }): Promise<any> => {
-      const result = await dataSources.genreAPI.deleteGenre(id);
-
-      return result;
-    },
+    
   }
 }
 
-export const resolvers = mergeResolvers([albumResolvers, aristResolvers, bandResolvers, resolversAll, trackResolvers, favoriteResolvers, ]);
+export const resolvers = mergeResolvers([albumResolvers, aristResolvers, bandResolvers, genreResolvers, resolversAll, trackResolvers, favoriteResolvers, ]);

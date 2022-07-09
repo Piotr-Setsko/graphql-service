@@ -1,8 +1,9 @@
 import { Context } from '@apollo/client';
-import { Del, Genre, Pagination } from '../../../interface';
+import { Del, Pagination } from '../../../interface';
 import { renameKey } from '../../../utils/utils';
 import { Artist } from '../../artists/artist.interface';
 import { Band } from '../../bands/band.interface';
+import { Genre } from '../../genres/genre.interface';
 import { Track } from '../../tracks/track.interface';
 import { Album } from '../album.interface';
 

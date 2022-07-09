@@ -5,16 +5,11 @@ import { favoriteTypeDefs } from './modules/favorites/schemas/favorite.schema';
 import { artistTypeDefs } from './modules/artists/schemas/artist.schema';
 import { albumTypeDefs } from './modules/albums/schemas/album.schema';
 import { bandTypeDefs } from './modules/bands/schemas/band.schema';
+import { genreTypeDefs } from './modules/genres/schemas/genre.schema';
 
 const allTypeDefs = gql`
   type Query {
     user(id: ID!): User
-
-    genre(id: ID!): Genre
-
-    genresAll: [Genre]!
-
-
   }
 
   type Mutation {
@@ -25,33 +20,11 @@ const allTypeDefs = gql`
       email: String!
     ): User
 
-    createGenre(input: GenreInput): Genre!
-
-    changeGenre(id: ID!, input: GenreInput): Genre!
-
-    deleteGenre(id: ID!): DEL
-
     login(email: String!, password: String!): jwt
-  }
-
-  input GenreInput {
-    name: String
-    description: String
-    country: String
-    year: Int
   }
 
   type jwt {
     jwt: String!
-  }
-
-  
-  type Genre {
-    id: ID!
-    name: String
-    description: String
-    country: String
-    year: Int
   }
 
   type User {
@@ -70,12 +43,18 @@ const allTypeDefs = gql`
     email: String!
   }
 
-  
-
   type DEL {
     acknowledged: Boolean
     deletedCount: Int
   }
 `;
 
-export const typeDefs = mergeTypeDefs([albumTypeDefs, artistTypeDefs, bandTypeDefs, allTypeDefs, trackTypeDefs, favoriteTypeDefs,]);
+export const typeDefs = mergeTypeDefs([
+  albumTypeDefs,
+  artistTypeDefs,
+  bandTypeDefs,
+  genreTypeDefs,
+  allTypeDefs,
+  trackTypeDefs,
+  favoriteTypeDefs,
+]);
