@@ -1,8 +1,9 @@
 import { Context } from '@apollo/client';
 import { renameKey } from '../../../utils/utils';
-import { Band, Del, Genre, Pagination } from '../../../interface';
+import { Del, Genre, Pagination } from '../../../interface';
 import { Track } from '../track.interface';
 import { Artist } from '../../artists/artist.interface';
+import { Band } from '../../bands/band.interface';
 
 export const trackResolvers = {
   Query: {
@@ -15,9 +16,7 @@ export const trackResolvers = {
     tracks: async (_: string, { limit, offset }: Pagination, { dataSources }: Context): Promise<[Track]> => {
       const tracks = await dataSources.trackAPI.getTracksAll(limit, offset);
 
-      return tracks.items.map((track: Track) => {
-        return renameKey(track);
-      })
+      return renameKey(tracks.items);
     }
   },
 

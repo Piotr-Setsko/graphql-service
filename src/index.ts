@@ -5,7 +5,7 @@ import { UserAPI } from './datasources/user';
 import { AlbumAPI } from './modules/albums/album.conrtoller';
 import { GenreAPI } from './datasources/genre';
 import { ArtistAPI } from './modules/artists/artists.controller';
-import { BandAPI } from './datasources/bands';
+import { BandAPI } from './modules/bands/band.controller';
 import { TrackAPI } from './modules/tracks/track.controller';
 import { FavoriteAPI } from './modules/favorites/favorite.controller';
 

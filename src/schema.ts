@@ -4,16 +4,11 @@ import { trackTypeDefs } from './modules/tracks/schemas/track.schema';
 import { favoriteTypeDefs } from './modules/favorites/schemas/favorite.schema';
 import { artistTypeDefs } from './modules/artists/schemas/artist.schema';
 import { albumTypeDefs } from './modules/albums/schemas/album.schema';
+import { bandTypeDefs } from './modules/bands/schemas/band.schema';
 
 const allTypeDefs = gql`
   type Query {
     user(id: ID!): User
-
-    band(id: ID!): Band
-
-    bandsAll: [Band]!
-
-    
 
     genre(id: ID!): Genre
 
@@ -50,15 +45,7 @@ const allTypeDefs = gql`
     jwt: String!
   }
 
-  type Band {
-    id: ID!
-    name: String
-    origin: String
-    members: [Member]
-    website: String
-    genres: [Genre]
-  }
-
+  
   type Genre {
     id: ID!
     name: String
@@ -83,13 +70,7 @@ const allTypeDefs = gql`
     email: String!
   }
 
-  type Member {
-    id: ID!
-    firstName: String
-    secondName: String
-    instrument: String
-    years: [String]
-  }
+  
 
   type DEL {
     acknowledged: Boolean
@@ -97,4 +78,4 @@ const allTypeDefs = gql`
   }
 `;
 
-export const typeDefs = mergeTypeDefs([albumTypeDefs, artistTypeDefs, allTypeDefs, trackTypeDefs, favoriteTypeDefs,]);
+export const typeDefs = mergeTypeDefs([albumTypeDefs, artistTypeDefs, bandTypeDefs, allTypeDefs, trackTypeDefs, favoriteTypeDefs,]);

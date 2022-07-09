@@ -5,6 +5,7 @@ import { trackResolvers } from './modules/tracks/service/tracks.service';
 import { favoriteResolvers } from './modules/favorites/services/favorites.service';
 import { aristResolvers } from './modules/artists/services/artists.service';
 import { albumResolvers } from './modules/albums/services/albums.service';
+import { bandResolvers } from './modules/bands/services/band.services';
 
 const resolversAll = {
   Query: {
@@ -16,21 +17,7 @@ const resolversAll = {
       return renameKey(user);
     },
 
-    band: async (_: string, { id }: { id: string }, { dataSources }: {
-      dataSources: any;
-    }): Promise<any> => {
-      const band = await dataSources.bandAPI.getBand(id);
-
-      return renameKey(band);
-    },
-
-    bandsAll: async (_: string, __: string, { dataSources }: {
-      dataSources: any;
-    }): Promise<any> => {
-      const bands = await dataSources.bandAPI.getBandAll();
-
-      return renameKey(bands.items);
-    },
+    
 
     
 
@@ -51,22 +38,7 @@ const resolversAll = {
     },
   },
 
-  Band: {
-    members: async ({ members }: { members: any }, _: string, { dataSources }: { dataSources: any }): Promise<any> => {
-      const artists = await Promise.all(members.map(async ({ id }: { id: string }) => await dataSources.artistAPI.getMember(id)));
-      const membersData = artists.map((item, i) => {
-        return ({
-          id: item._id,
-          firstName: item.firstName,
-          secondName: item.secondName,
-          instrument: members[i].instrument,
-          years: members[i].years
-        })
-      });
-
-      return membersData;
-    }
-  },
+  
 
  
 
@@ -119,4 +91,4 @@ const resolversAll = {
   }
 }
 
-export const resolvers = mergeResolvers([albumResolvers, aristResolvers, resolversAll, trackResolvers, favoriteResolvers, ]);
+export const resolvers = mergeResolvers([albumResolvers, aristResolvers, bandResolvers, resolversAll, trackResolvers, favoriteResolvers, ]);

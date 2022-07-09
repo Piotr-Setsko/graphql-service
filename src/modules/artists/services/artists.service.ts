@@ -1,7 +1,8 @@
 import { Context } from '@apollo/client';
 import { renameKey } from '../../../utils/utils';
-import { Band, Del, Pagination } from '../../../interface';
+import { Del, Pagination } from '../../../interface';
 import { Artist } from '../artist.interface';
+import { Band } from '../../bands/band.interface';
 
 export const aristResolvers = {
   Query: {
