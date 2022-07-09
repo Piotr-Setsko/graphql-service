@@ -1,14 +1,4 @@
-interface Artist {
-  _id: string;
-  firstName: string;
-  secondName: string;
-  middleName: string;
-  birthDate: string;
-  birthPlace: string;
-  country: string;
-  bandsIds: string[]
-  instruments: string[];
-}
+
 
 interface User {
   _id: string;
@@ -52,14 +42,7 @@ interface Album {
   image: string;
 }
 
-interface Favorite {
-  _id: string;
-  userId: string;
-  bandsIds: string[];
-  genresIds: string[];
-  artistsIds: string[];
-  tracksIds: string[];
-}
+
 
 interface Pagination {
   limit: number,
@@ -71,4 +54,4 @@ interface Del {
   deletedCount: number
 }
 
-export { User, Artist, Genre, Pagination, Del };
+export { Album, User, Genre, Band, Pagination, Del }; 

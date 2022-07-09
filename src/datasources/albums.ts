@@ -10,4 +10,8 @@ export class AlbumAPI extends RESTDataSource {
   async getAlbumsAll() {
     return this.get('');
   }
+
+  async getAlbum(id: string) {
+    return this.get(`/${encodeURIComponent(id)}`);
+  }
 }

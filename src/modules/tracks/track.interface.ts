@@ -1,6 +1,5 @@
 export interface Track {
-  _id?: string;
-  id?: string; 
+  _id: string;
   title: string;
   albumId: string;
   bandsIds: string[];

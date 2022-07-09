@@ -7,10 +7,10 @@ export class ArtistAPI extends RESTDataSource {
     this.baseURL = 'http://localhost:3002/v1/artists';
   }
 
-  async getArtistsAll(limit=5) {
+  async getArtistsAll(limit = 5, offset = 0) {
     return this.get('', {
       "limit": limit,
-      "offset": 0
+      "offset": offset
     });
   }
 

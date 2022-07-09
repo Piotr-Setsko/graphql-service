@@ -22,8 +22,8 @@ export class UserAPI extends RESTDataSource {
     return this.post('login', userData);
   }
 
-  async verifyUser(token: any) {
-    return this.get('verify', token);
-  }
+  // async verifyUser(token: any) {
+  //   return this.get('verify', token);
+  // }
 }
 

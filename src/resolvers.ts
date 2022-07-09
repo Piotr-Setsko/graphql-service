@@ -1,6 +1,6 @@
 import { Context } from '@apollo/client';
-import { Artist, Genre } from './interface';
-import { Track } from './tracks/track.interface';
+import { Album, Genre } from './interface';
+import { Track } from './modules/tracks/track.interface';
 import { renameKey } from './utils/utils';
 
 export const resolversAll = {
@@ -27,6 +27,12 @@ export const resolversAll = {
       const bands = await dataSources.bandAPI.getBandAll();
 
       return renameKey(bands.items);
+    },
+
+    album: async(_: string, {id}: {id: string}, { dataSources }: Context): Promise<Album> => {
+      const album = await dataSources.albumAPI.getAlbum(id);
+
+      return renameKey(album);
     },
 
     albumsAll: async (_: string, __: string, { dataSources }: {

@@ -16,7 +16,7 @@ export class TrackAPI extends RESTDataSource {
     return this.get(`/${encodeURIComponent(id)}`);
   }
 
-  async getTracksAll(limit = 3, offset = 0) {
+  async getTracksAll(limit = 5, offset = 0) {
     return this.get('', {
       "limit": limit,
       "offset": offset

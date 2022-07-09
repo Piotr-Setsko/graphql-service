@@ -8,6 +8,8 @@ const allTypeDefs = gql`
 
     bandsAll: [Band]!
 
+    album(id: ID!): Album!
+
     albumsAll: [Album]!
 
     genre(id: ID!): Genre
@@ -82,15 +84,6 @@ const allTypeDefs = gql`
     country: String
     year: Int
   }
-
-  # type Favourites {
-  #   id: ID!
-  #   userId: ID!
-  #   bands: [ID]
-  #   genres: [ID]
-  #   artists: [ID]
-  #   tracks: [ID]
-  # }
 
   type Album {
     id: ID
