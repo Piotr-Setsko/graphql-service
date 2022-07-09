@@ -6,20 +6,27 @@ export const favoriteTypeDefs = gql`
   }
 
   type Mutation {
-    addTrackToFavourites(input: FavouritesInput): Favourites
+    addTrackToFavourites(input: FavouritesInput): Favourites!
+
+    addBandToFavourites(input: FavouritesInput): Favourites!
+
+    addArtistToFavourites(input: FavouritesInput): Favourites!
+
+    addGenreToFavourites(input: FavouritesInput): Favourites!
+
+    removeTrackFromFavourites(input: FavouritesInput): Favourites
   }
 
   type Favourites {
     id: ID!
     userId: ID!
-    bands: [ID]
-    genres: [ID]
-    artists: [ID]
-    tracks: [ID]
+    bands: [Band]
+    genres: [Genre]
+    artists: [Artist]
+    tracks: [Track]
   }
 
   input FavouritesInput {
-    type: String!
     id: ID!
   }
 `

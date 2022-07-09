@@ -15,7 +15,7 @@ export const albumResolvers = {
     },
 
     albums: async (_: string, { limit, offset }: Pagination, { dataSources }: Context): Promise<Album> => {
-      const albums = await dataSources.albumAPI.getAlbumsAll(limit, offset);
+      const albums = await dataSources.albumAPI.getAlbums(limit, offset);
 
       return renameKey(albums.items);
     },
