@@ -1,4 +1,5 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
+import { Artist } from './artist.interface';
 
 export class ArtistAPI extends RESTDataSource {
   constructor() {
@@ -16,6 +17,18 @@ export class ArtistAPI extends RESTDataSource {
 
   async getArtist(id: string) {
     return this.get(`/${encodeURIComponent(id)}`);
+  }
+
+  async createArtist(data: Artist) {
+    return this.post('', data);
+  }
+
+  async updateArtist(id: string, data: Artist) {
+    return this.put(`/${encodeURIComponent(id)}`, data);
+  }
+
+  async deleteArtist(id: string) {
+    return this.delete(`/${encodeURIComponent(id)}`);
   }
 
   async getMember(id: string) {

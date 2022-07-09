@@ -1,9 +1,12 @@
 import { Context } from '@apollo/client';
-import { Album, Genre } from './interface';
-import { Track } from './modules/tracks/track.interface';
+import { mergeResolvers } from '@graphql-tools/merge';
 import { renameKey } from './utils/utils';
+import { trackResolvers } from './modules/tracks/service/tracks.service';
+import { favoriteResolvers } from './modules/favorites/services/favorites.service';
+import { aristResolvers } from './modules/artists/services/artists.service';
+import { Album} from './interface';
 
-export const resolversAll = {
+const resolversAll = {
   Query: {
     user: async (_: string, { id }: { id: string }, { dataSources }: {
       dataSources: any;
@@ -58,12 +61,6 @@ export const resolversAll = {
 
       return renameKey(genres.items);
     },
-
-    artistsAll: async (_: string, __: string, { dataSources }: { dataSources: any }): Promise<any> => {
-      const artists = await dataSources.artistAPI.getArtistsAll();
-
-      return renameKey(artists.items)
-    },
   },
 
   Band: {
@@ -83,13 +80,7 @@ export const resolversAll = {
     }
   },
 
-  Artist: {
-    bands: async ({ bandsIds }: { bandsIds: [string] }, _: string, { dataSources }: { dataSources: any }): Promise<any> => {
-      const bands = await Promise.all(bandsIds.map(async (id) => await dataSources.bandAPI.getBand(id)));
-
-      return renameKey(bands);
-    }
-  },
+ 
 
   Mutation: {
     register: async (_: string, args: { firstName: string, secondName: string, password: string, email: string }, { dataSources }: {
@@ -139,3 +130,5 @@ export const resolversAll = {
     },
   }
 }
+
+export const resolvers = mergeResolvers([resolversAll, trackResolvers, favoriteResolvers, aristResolvers]);
