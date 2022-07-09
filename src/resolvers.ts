@@ -1,10 +1,10 @@
 import { Context } from '@apollo/client';
-import { mergeResolvers } from '@graphql-tools/merge';
 import { renameKey } from './utils/utils';
+import { mergeResolvers } from '@graphql-tools/merge';
 import { trackResolvers } from './modules/tracks/service/tracks.service';
 import { favoriteResolvers } from './modules/favorites/services/favorites.service';
 import { aristResolvers } from './modules/artists/services/artists.service';
-import { Album} from './interface';
+import { albumResolvers } from './modules/albums/services/albums.service';
 
 const resolversAll = {
   Query: {
@@ -32,19 +32,7 @@ const resolversAll = {
       return renameKey(bands.items);
     },
 
-    album: async(_: string, {id}: {id: string}, { dataSources }: Context): Promise<Album> => {
-      const album = await dataSources.albumAPI.getAlbum(id);
-
-      return renameKey(album);
-    },
-
-    albumsAll: async (_: string, __: string, { dataSources }: {
-      dataSources: any;
-    }): Promise<any> => {
-      const albums = await dataSources.albumAPI.getAlbumsAll();
-
-      return renameKey(albums.items);
-    },
+    
 
     genre: async (_: string, { id }: { id: string }, { dataSources }: {
       dataSources: Context;
@@ -131,4 +119,4 @@ const resolversAll = {
   }
 }
 
-export const resolvers = mergeResolvers([resolversAll, trackResolvers, favoriteResolvers, aristResolvers]);
+export const resolvers = mergeResolvers([albumResolvers, aristResolvers, resolversAll, trackResolvers, favoriteResolvers, ]);

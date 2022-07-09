@@ -26,7 +26,7 @@ export const aristResolvers = {
     },
 
     updateArtist: async (_: string, args: { id: string, input: Artist }, { dataSources }: Context): Promise<Artist> => {
-      const artist = await dataSources.artistAPI.changeTrack(args.id, { ...args.input });
+      const artist = await dataSources.artistAPI.updateArtist(args.id, { ...args.input });
 
       return renameKey(artist);
     },

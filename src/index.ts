@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server';
 import { resolvers } from './resolvers';
 import { typeDefs } from './schema';
 import { UserAPI } from './datasources/user';
-import { AlbumAPI } from './datasources/albums';
+import { AlbumAPI } from './modules/albums/album.conrtoller';
 import { GenreAPI } from './datasources/genre';
 import { ArtistAPI } from './modules/artists/artists.controller';
 import { BandAPI } from './datasources/bands';

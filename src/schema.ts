@@ -1,8 +1,9 @@
-import { mergeTypeDefs } from '@graphql-tools/merge';
 import { gql } from 'apollo-server';
+import { mergeTypeDefs } from '@graphql-tools/merge';
 import { trackTypeDefs } from './modules/tracks/schemas/track.schema';
 import { favoriteTypeDefs } from './modules/favorites/schemas/favorite.schema';
 import { artistTypeDefs } from './modules/artists/schemas/artist.schema';
+import { albumTypeDefs } from './modules/albums/schemas/album.schema';
 
 const allTypeDefs = gql`
   type Query {
@@ -12,19 +13,13 @@ const allTypeDefs = gql`
 
     bandsAll: [Band]!
 
-    album(id: ID!): Album!
-
-    albumsAll: [Album]!
+    
 
     genre(id: ID!): Genre
 
     genresAll: [Genre]!
 
 
-  }
-
-  type Band {
-    members: [Member]
   }
 
   type Mutation {
@@ -55,8 +50,6 @@ const allTypeDefs = gql`
     jwt: String!
   }
 
- 
-
   type Band {
     id: ID!
     name: String
@@ -72,17 +65,6 @@ const allTypeDefs = gql`
     description: String
     country: String
     year: Int
-  }
-
-  type Album {
-    id: ID
-    name: String
-    released: Int
-    artists: [Artist]
-    bands: [Band]
-    tracks: [Track]
-    genres: [Genre]
-    image: String
   }
 
   type User {
@@ -115,4 +97,4 @@ const allTypeDefs = gql`
   }
 `;
 
-export const typeDefs = mergeTypeDefs([allTypeDefs, trackTypeDefs, favoriteTypeDefs, artistTypeDefs]);
+export const typeDefs = mergeTypeDefs([albumTypeDefs, artistTypeDefs, allTypeDefs, trackTypeDefs, favoriteTypeDefs,]);
