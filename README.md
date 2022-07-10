@@ -10,4 +10,4 @@
  # server watch+debug
    npm run start:dev
    ```
-5. After login user and get jwt token, copy and past it in Apollo Studio - "Headers": "Authorization" - "Bearer 'actual.jwt.token'" 
+5. After get jwt token, copy and past it in Apollo Studio - "Headers": "Authorization" - "Bearer 'actual.jwt.token'" 

@@ -13,3 +13,8 @@ export interface UserOutput {
   password: string;
   email: string;
 } 
+
+export interface UserLogin {
+  password: string;
+  email: string;
+}

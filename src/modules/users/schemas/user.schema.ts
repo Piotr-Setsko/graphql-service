@@ -3,6 +3,8 @@ import { gql } from 'apollo-server';
 export const userTypeDefs = gql`
   type Query {
     user(id: ID!): User!
+
+    jwt(input: loginUser): jwt!
   }
 
   type Mutation {
@@ -20,16 +22,20 @@ export const userTypeDefs = gql`
   type User {
     id: ID!
     firstName: String
-    secondName: String
-    middleName: String
+    lastName: String
     password: String
     email: String!
   }
 
   input registerUser {
     firstName: String!
-    secondName: String!
+    lastName: String!
     password: String!
     email: String!
+  }
+
+  input loginUser {
+    email: String!
+    password: String!
   }
 `
