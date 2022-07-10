@@ -1,4 +1,4 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
+import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest';
 import { Artist } from './artist.interface';
 
 export class ArtistAPI extends RESTDataSource {
@@ -6,6 +6,10 @@ export class ArtistAPI extends RESTDataSource {
     super();
 
     this.baseURL = 'http://localhost:3002/v1/artists';
+  }
+
+  async willSendRequest(request: RequestOptions) {
+    request.headers.set('Authorization', this.context.token);
   }
 
   async getArtistsAll(limit = 5, offset = 0) {

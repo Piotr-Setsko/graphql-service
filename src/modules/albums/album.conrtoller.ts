@@ -1,4 +1,4 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
+import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest';
 import { Album } from './album.interface';
 
 export class AlbumAPI extends RESTDataSource {
@@ -6,6 +6,10 @@ export class AlbumAPI extends RESTDataSource {
     super();
 
     this.baseURL = 'http://localhost:3005/v1/albums';
+  }
+
+  async willSendRequest(request: RequestOptions) {
+    request.headers.set('Authorization', this.context.token);
   }
 
   async getAlbums(limit = 5, offset = 0) {

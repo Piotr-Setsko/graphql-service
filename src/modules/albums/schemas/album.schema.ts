@@ -16,7 +16,7 @@ export const albumTypeDefs = gql`
   }
 
   type Album {
-    id: ID
+    id: ID!
     name: String
     released: Int
     artists: [Artist]
@@ -27,8 +27,8 @@ export const albumTypeDefs = gql`
   }
 
   input AlbumInput {
-    name: String
-    released: Int
+    name: String!
+    released: Int!
     artists: [String]
     bands: [String]
     tracks: [String]
