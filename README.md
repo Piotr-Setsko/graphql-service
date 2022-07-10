@@ -3,11 +3,11 @@
 3. You can install node modules by:
   npm i
 4. To run server:
-
-# server prod mode
+```bash
+ # server prod mode
   npm run start
 
  # server watch+debug
    npm run start:dev
-
+   ```
 5. After login user and get jwt token, copy and past it in Apollo Studio - "Headers": "Authorization" - "Bearer 'actual.jwt.token'" 
