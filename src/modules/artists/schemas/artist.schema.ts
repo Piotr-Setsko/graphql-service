@@ -8,7 +8,7 @@ export const artistTypeDefs = gql`
  }
 
  type Mutation {
-    createArtist(input: ArtistInput): Artist!
+    createArtist(input: ArtistCreate): Artist!
 
     updateArtist(id: ID!, input: ArtistInput): Artist!
 
@@ -35,6 +35,17 @@ export const artistTypeDefs = gql`
     birthDate: String
     birthPlace: String
     country: String
+    bands: [String]
+    instruments: [String]
+  }
+
+  input ArtistCreate {
+    firstName: String!
+    secondName: String!
+    middleName: String
+    birthDate: String
+    birthPlace: String
+    country: String!
     bands: [String]
     instruments: [String]
   }

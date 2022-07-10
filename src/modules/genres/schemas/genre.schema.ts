@@ -8,7 +8,7 @@ export const genreTypeDefs = gql`
   }
 
   type Mutation {
-    createGenre(input: GenreInput): Genre!
+    createGenre(input: GenreCreate): Genre!
 
     updateGenre(id: ID!, input: GenreInput): Genre!
 
@@ -17,6 +17,13 @@ export const genreTypeDefs = gql`
 
   input GenreInput {
     name: String
+    description: String
+    country: String
+    year: Int
+  }
+
+  input GenreCreate {
+    name: String!
     description: String
     country: String
     year: Int
