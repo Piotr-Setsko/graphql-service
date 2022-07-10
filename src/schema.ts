@@ -6,43 +6,9 @@ import { artistTypeDefs } from './modules/artists/schemas/artist.schema';
 import { albumTypeDefs } from './modules/albums/schemas/album.schema';
 import { bandTypeDefs } from './modules/bands/schemas/band.schema';
 import { genreTypeDefs } from './modules/genres/schemas/genre.schema';
+import { userTypeDefs } from './modules/users/schemas/user.schema';
 
-const allTypeDefs = gql`
-  type Query {
-    user(id: ID!): User
-  }
-
-  type Mutation {
-    register(
-      firstName: String!
-      secondName: String!
-      password: String!
-      email: String!
-    ): User
-
-    login(email: String!, password: String!): jwt
-  }
-
-  type jwt {
-    jwt: String!
-  }
-
-  type User {
-    id: ID!
-    firstName: String
-    secondName: String
-    middleName: String
-    password: String
-    email: String!
-  }
-
-  type registerUser {
-    firstName: String!
-    secondName: String!
-    password: String!
-    email: String!
-  }
-
+const sharedTypeDefs = gql`
   type DEL {
     acknowledged: Boolean
     deletedCount: Int
@@ -54,7 +20,8 @@ export const typeDefs = mergeTypeDefs([
   artistTypeDefs,
   bandTypeDefs,
   genreTypeDefs,
-  allTypeDefs,
   trackTypeDefs,
+  userTypeDefs,
   favoriteTypeDefs,
+  sharedTypeDefs,
 ]);

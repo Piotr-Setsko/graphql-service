@@ -15,6 +15,12 @@ export const favoriteTypeDefs = gql`
     addGenreToFavourites(input: FavouritesInput): Favourites!
 
     removeTrackFromFavourites(input: FavouritesInput): Favourites
+
+    removeBandFromFavourites(input: FavouritesInput): Favourites
+
+    removeArtistFromFavourites(input: FavouritesInput): Favourites
+
+    removeGenreFromFavourites(input: FavouritesInput): Favourites
   }
 
   type Favourites {

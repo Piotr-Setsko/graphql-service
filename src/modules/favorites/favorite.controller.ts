@@ -39,4 +39,17 @@ export class FavoriteAPI extends RESTDataSource {
   async removeTrackFromFavourites(data: FavouriteInput) {
     return this.put('remove', data);
   }
+
+  async removeBandFromFavourites(data: FavouriteInput) {
+    return this.put('remove', data);
+  }
+
+  async removeArtistFromFavourites(data: FavouriteInput) {
+    return this.put('remove', data);
+
+  }
+
+  async removeGenreFromFavourites(data: FavouriteInput) {
+    return this.put('remove', data);
+  }
 }

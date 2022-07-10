@@ -1,4 +1,5 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
+import { User } from './user.interface';
 
 export class UserAPI extends RESTDataSource {
   constructor() {
@@ -11,19 +12,15 @@ export class UserAPI extends RESTDataSource {
     return this.get(`/${encodeURIComponent(id)}`);
   }
 
-  async registerUser(userData: any) {
+  async registerUser(userData: User) {
     return this.post(
       'register',
       userData
     );
   }
 
-  async loginUser(userData: any) {
+  async loginUser(userData: User) {
     return this.post('login', userData);
   }
-
-  // async verifyUser(token: any) {
-  //   return this.get('verify', token);
-  // }
 }
 

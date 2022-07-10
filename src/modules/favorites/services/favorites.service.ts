@@ -49,6 +49,27 @@ export const favoriteResolvers = {
 
       return renameKey(favorite);
     },
+
+    removeBandFromFavourites: async (_: string, { input }: { input: FavouriteInput }, { dataSources }: Context): Promise<Favourite> => {
+      input.type = "bands";
+      const favorite = await dataSources.favoriteAPI.removeBandFromFavourites(input);
+
+      return renameKey(favorite);
+    },
+
+    removeArtistFromFavourites: async (_: string, { input }: { input: FavouriteInput }, { dataSources }: Context): Promise<Favourite> => {
+      input.type = "artists";
+      const favorite = await dataSources.favoriteAPI.removeArtistFromFavourites(input);
+
+      return renameKey(favorite);
+    },
+
+    removeGenreFromFavourites: async (_: string, { input }: { input: FavouriteInput }, { dataSources }: Context): Promise<Favourite> => {
+      input.type = "genres";
+      const favorite = await dataSources.favoriteAPI.removeGenreFromFavourites(input);
+
+      return renameKey(favorite);
+    },
   },
 
   Favourites: {

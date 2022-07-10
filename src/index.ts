@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server';
 import { resolvers } from './resolvers';
 import { typeDefs } from './schema';
-import { UserAPI } from './datasources/user';
+import { UserAPI } from './modules/users/user.controller';
 import { AlbumAPI } from './modules/albums/album.conrtoller';
 import { GenreAPI } from './modules/genres/genre.controller';
 import { ArtistAPI } from './modules/artists/artists.controller';
